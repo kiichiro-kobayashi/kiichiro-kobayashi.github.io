@@ -1,10 +1,83 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>selfIntroduction</title>
-  </head>
-  <body>
-    <h1 class="title">よろしくお願いします</h1>
-  </body>
+<!-- index.html -->
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kiichiro Kobayashi — Paintings & Drawings</title>
+  <meta name="description" content="Kiichiro Kobayashi — paintings, drawings, and projects." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">Kiichiro Kobayashi</a>
+    <nav class="nav">
+      <a href="works.html">Works</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <h1>Paintings & Drawings</h1>
+        <p class="lead">
+          日常、身体、記憶。絵画とドローイングを中心に制作しています。
+        </p>
+        <div class="hero-actions">
+          <a class="btn" href="works.html">View Works</a>
+          <a class="btn btn-ghost" href="#about">Statement</a>
+        </div>
+      </div>
+
+      <figure class="hero-figure">
+        <!-- ここにトップ画像（作品）を置く -->
+        <img
+          src="assets/hero.jpg"
+          alt="Featured work"
+          loading="lazy"
+        />
+        <figcaption>Featured work (2026)</figcaption>
+      </figure>
+    </section>
+
+    <section class="section" id="about">
+      <h2>About</h2>
+      <div class="two-col">
+        <p>
+          1995年神奈川県横浜市生まれ。愛知県岩倉市で育つ。2018年、武蔵野美術大学油絵学科油絵専攻卒業。
+
+幼少期より絵画に親しみ、仏教美術や精神世界への関心を背景に、絵画を主なメディアとして制作を行ってきた。 2007年には仏像彫刻家・松本明慶の工房でのワークショップに参加し、彫刻紋様や仏教美術に基づく造形感覚を学ぶ。これらの経験は現在の作品における身体性や反復的モチーフ、時間性の感覚へとつながっている。
+
+武蔵野美術大学在学中は、絵画に加えパフォーマンスやミクストメディアにも取り組み、2015年に兄の死を主題とした作品で学内個人賞を受賞。卒業制作では、自身で染色した布に墨や透明水彩を用いて描く《real clothes I・II・III》を発表し、以後の制作の基盤となる手法を確立した。
+
+卒業後も絵画表現を軸に制作を続け、2020年には仏画工房での記憶を主題とした作品《年賀状だけの関係が終わる。》が第22回グラフィック「1_WALL」ファイナリストに選出される。2021年以降、個展およびグループ展を継続的に開催。
+
+現在は、絵画制作を中心に、ドローイングやデジタル表現も取り入れながら、個人的な記憶や精神的体験を出発点とした表現を探求している。
+        </p>
+        <p class="muted">
+          ※この文は仮です。あなたの最新バイオに置き換えてください。
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <h2>Contact</h2>
+      <p>
+        お問い合わせ：<a href="mailto:yourname@example.com">yourname@example.com</a><br />
+        Instagram：<a href="#" rel="noopener">(@yourhandle)</a>
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="y"></span> Kiichiro Kobayashi</p>
+  </footer>
+
+  <script>
+    // 年だけ入れる（最小のJS）
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+</body>
 </html>
