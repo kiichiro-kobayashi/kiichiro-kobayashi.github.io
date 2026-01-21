@@ -1,83 +1,423 @@
-<!-- index.html -->
 <!doctype html>
 <html lang="ja">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Kiichiro Kobayashi — Paintings & Drawings</title>
-  <meta name="description" content="Kiichiro Kobayashi — paintings, drawings, and projects." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kiichiro Kobayashi | Portfolio</title>
+  <meta name="description" content="小林喜一郎 / Kiichiro Kobayashi - Paintings and works." />
+
+  <!-- OGP（任意） -->
+  <meta property="og:title" content="Kiichiro Kobayashi | Portfolio" />
+  <meta property="og:description" content="Paintings and works. 小林喜一郎の作品紹介サイト。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/og-image.jpg" />
+
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-  <header class="site-header">
-    <a class="brand" href="index.html">Kiichiro Kobayashi</a>
-    <nav class="nav">
-      <a href="works.html">Works</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
+  <!-- Header -->
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a class="logo" href="#top">
+        <span class="logo__en">KIICHIRO KOBAYASHI</span>
+        <span class="logo__jp">小林 喜一郎</span>
+      </a>
+
+      <nav class="nav" aria-label="Site navigation">
+        <a class="nav-link" href="#about">About</a>
+        <a class="nav-link" href="#works">Works</a>
+        <a class="nav-link" href="#cv">CV</a>
+        <a class="nav-link" href="#contact">Contact</a>
+      </nav>
+    </div>
   </header>
 
   <main>
+    <!-- Hero -->
     <section class="hero">
-      <div class="hero-copy">
-        <h1>Paintings & Drawings</h1>
-        <p class="lead">
-          日常、身体、記憶。絵画とドローイングを中心に制作しています。
-        </p>
-        <div class="hero-actions">
-          <a class="btn" href="works.html">View Works</a>
-          <a class="btn btn-ghost" href="#about">Statement</a>
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <p class="kicker">Paintings and Works</p>
+          <h1 class="hero-title">
+            小林 喜一郎<br />
+            <span class="hero-title__en">Kiichiro Kobayashi</span>
+          </h1>
+
+          <p class="hero-lead">
+            絵画を主なメディアに、個人的な記憶や精神的体験を出発点とした表現を探求しています。
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn" href="#works">作品を見る</a>
+            <a class="btn btn--ghost" href="#about">プロフィール</a>
+          </div>
+
+          <ul class="meta">
+            <li>Born 1995, Kanagawa / Raised in Aichi</li>
+            <li>BFA, Musashino Art University (Oil Painting), 2018</li>
+            <li>Finalist, 22nd Graphic “1_WALL”, 2020</li>
+          </ul>
+        </div>
+
+        <div class="hero-media">
+          <img src="assets/hero.jpg" alt="作品イメージ（差し替え可）" />
+          <p class="caption">※画像は差し替えできます（assets/hero.jpg）</p>
         </div>
       </div>
-
-      <figure class="hero-figure">
-        <!-- ここにトップ画像（作品）を置く -->
-        <img
-          src="assets/hero.jpg"
-          alt="Featured work"
-          loading="lazy"
-        />
-        <figcaption>Featured work (2026)</figcaption>
-      </figure>
     </section>
 
-    <section class="section" id="about">
-      <h2>About</h2>
-      <div class="two-col">
-        <p>
-          1995年神奈川県横浜市生まれ。愛知県岩倉市で育つ。2018年、武蔵野美術大学油絵学科油絵専攻卒業。
+    <!-- About -->
+    <section id="about" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>About</h2>
+          <p class="section-sub">Profile / Artist Statement</p>
+        </div>
 
-幼少期より絵画に親しみ、仏教美術や精神世界への関心を背景に、絵画を主なメディアとして制作を行ってきた。 2007年には仏像彫刻家・松本明慶の工房でのワークショップに参加し、彫刻紋様や仏教美術に基づく造形感覚を学ぶ。これらの経験は現在の作品における身体性や反復的モチーフ、時間性の感覚へとつながっている。
+        <div class="prose">
+          <p>
+            小林喜一郎（Kiichiro Kobayashi）。1995年神奈川県横浜市生まれ。愛知県岩倉市および名古屋市で育つ。2018年、武蔵野美術大学造形学部油絵学科油絵専攻卒業。
+          </p>
+          <p>
+            幼少期より絵画に親しみ、仏教美術や精神世界への関心を背景に、絵画を主なメディアとして制作を行ってきた。2007年には仏像彫刻家・松本明慶の工房でのワークショップに参加し、
+            彫刻紋様や仏教美術に基づく造形感覚を学ぶ。これらの経験は現在の作品における身体性や反復的モチーフ、時間性の感覚へとつながっている。
+          </p>
+          <p>
+            在学中は絵画に加えパフォーマンスやミクストメディアにも取り組み、2015年に兄の死を主題とした作品で学内個人賞を受賞。卒業制作では、自身で染色した布に墨や透明水彩を用いて描く
+            《Real Clothes I・II・III》を発表し、以後の制作の基盤となる手法を確立した。
+          </p>
+          <p>
+            2020年、仏画工房での記憶を主題とした作品《年賀状だけの関係が終わる。》が第22回グラフィック「1_WALL」ファイナリストに選出。2021年以降、個展およびグループ展を継続的に開催。
+          </p>
+          <p>
+            現在は、絵画制作を中心にドローイングやデジタル表現も取り入れながら、日常の中で「重要ではない」と判断されている情報や色が、どのような前提のもとで取捨選択されているのかに関心を持ち、
+            反復的な行為を通して、意味が立ち上がる瞬間とその不安定さを可視化する制作に取り組んでいる。
+          </p>
+        </div>
 
-武蔵野美術大学在学中は、絵画に加えパフォーマンスやミクストメディアにも取り組み、2015年に兄の死を主題とした作品で学内個人賞を受賞。卒業制作では、自身で染色した布に墨や透明水彩を用いて描く《real clothes I・II・III》を発表し、以後の制作の基盤となる手法を確立した。
+        <div class="chips" aria-label="keywords">
+          <span class="chip">Painting</span>
+          <span class="chip">Dyed fabric</span>
+          <span class="chip">Ink</span>
+          <span class="chip">Buddhist art</span>
+          <span class="chip">Memory</span>
+          <span class="chip">Repetition</span>
+          <span class="chip">Time</span>
+        </div>
+      </div>
+    </section>
 
-卒業後も絵画表現を軸に制作を続け、2020年には仏画工房での記憶を主題とした作品《年賀状だけの関係が終わる。》が第22回グラフィック「1_WALL」ファイナリストに選出される。2021年以降、個展およびグループ展を継続的に開催。
+    <!-- Works -->
+    <section id="works" class="section section--alt">
+      <div class="container">
+        <div class="section-head">
+          <h2>Works</h2>
+          <p class="section-sub">Selected works（クリックで拡大表示）</p>
+        </div>
 
-現在は、絵画制作を中心に、ドローイングやデジタル表現も取り入れながら、個人的な記憶や精神的体験を出発点とした表現を探求している。
-        </p>
-        <p class="muted">
-          ※この文は仮です。あなたの最新バイオに置き換えてください。
+        <div class="grid">
+
+          <!-- 1 -->
+          <article class="card">
+            <a class="card-media work-link"
+               href="assets/work-01.jpg"
+               data-title="年賀状だけの関係が終わる。"
+               data-meta="2020 / 1352×2000mm"
+               data-desc="三角チャコ、墨、膠、繊維用染料、綿布、木製パネル">
+              <img src="assets/work-01.jpg" alt="年賀状だけの関係が終わる。 2020" />
+            </a>
+            <div class="card-body">
+              <h3 class="card-title">年賀状だけの関係が終わる。</h3>
+              <p class="card-meta">2020 / 1352×2000mm</p>
+              <p class="card-desc">三角チャコ、墨、膠、繊維用染料、綿布、木製パネル</p>
+            </div>
+          </article>
+
+          <!-- 2 -->
+          <article class="card">
+            <a class="card-media work-link"
+               href="assets/work-02.jpg"
+               data-title="Real Clothes Ⅰ"
+               data-meta="2018 / 675×380mm"
+               data-desc="墨、透明水彩、繊維用染料、綿布、木製パネル">
+              <img src="assets/work-02.jpg" alt="Real Clothes Ⅰ 2018" />
+            </a>
+            <div class="card-body">
+              <h3 class="card-title">Real Clothes Ⅰ</h3>
+              <p class="card-meta">2018 / 675×380mm</p>
+              <p class="card-desc">墨、透明水彩、繊維用染料、綿布、木製パネル</p>
+            </div>
+          </article>
+
+          <!-- 3 -->
+          <article class="card">
+            <a class="card-media work-link"
+               href="assets/work-03.jpg"
+               data-title="Real Clothes Ⅱ"
+               data-meta="2018 / 675×380mm"
+               data-desc="墨、透明水彩、繊維用染料、綿布、木製パネル">
+              <img src="assets/work-03.jpg" alt="Real Clothes Ⅱ 2018" />
+            </a>
+            <div class="card-body">
+              <h3 class="card-title">Real Clothes Ⅱ</h3>
+              <p class="card-meta">2018 / 675×380mm</p>
+              <p class="card-desc">墨、透明水彩、繊維用染料、綿布、木製パネル</p>
+            </div>
+          </article>
+
+          <!-- 4 -->
+          <article class="card">
+            <a class="card-media work-link"
+               href="assets/work-04.jpg"
+               data-title="Real Clothes Ⅲ"
+               data-meta="2018 / 675×380mm"
+               data-desc="墨、透明水彩、繊維用染料、綿布、木製パネル">
+              <img src="assets/work-04.jpg" alt="Real Clothes Ⅲ 2018" />
+            </a>
+            <div class="card-body">
+              <h3 class="card-title">Real Clothes Ⅲ</h3>
+              <p class="card-meta">2018 / 675×380mm</p>
+              <p class="card-desc">墨、透明水彩、繊維用染料、綿布、木製パネル</p>
+            </div>
+          </article>
+
+          <!-- 5 -->
+          <article class="card">
+            <a class="card-media work-link"
+               href="assets/work-05.jpg"
+               data-title="Home Comforts Ⅰ"
+               data-meta="2021 / 640×360mm"
+               data-desc="ジェッソ、墨、透明水彩、膠、繊維用染料、綿布、木製パネル">
+              <img src="assets/work-05.jpg" alt="Home Comforts Ⅰ 2021" />
+            </a>
+            <div class="card-body">
+              <h3 class="card-title">Home Comforts Ⅰ</h3>
+              <p class="card-meta">2021 / 640×360mm</p>
+              <p class="card-desc">ジェッソ、墨、透明水彩、膠、繊維用染料、綿布、木製パネル</p>
+            </div>
+          </article>
+
+          <!-- 6 -->
+          <article class="card">
+            <a class="card-media work-link"
+               href="assets/work-06.jpg"
+               data-title="Home Comforts Ⅱ"
+               data-meta="2021 / 640×360mm"
+               data-desc="ジェッソ、墨、透明水彩、膠、繊維用染料、綿布、木製パネル">
+              <img src="assets/work-06.jpg" alt="Home Comforts Ⅱ 2021" />
+            </a>
+            <div class="card-body">
+              <h3 class="card-title">Home Comforts Ⅱ</h3>
+              <p class="card-meta">2021 / 640×360mm</p>
+              <p class="card-desc">ジェッソ、墨、透明水彩、膠、繊維用染料、綿布、木製パネル</p>
+            </div>
+          </article>
+
+          <!-- 7 -->
+          <article class="card">
+            <a class="card-media work-link"
+               href="assets/work-07.jpg"
+               data-title="Home Comforts Ⅲ"
+               data-meta="2021 / 640×360mm"
+               data-desc="ジェッソ、墨、透明水彩、膠、繊維用染料、綿布、木製パネル">
+              <img src="assets/work-07.jpg" alt="Home Comforts Ⅲ 2021" />
+            </a>
+            <div class="card-body">
+              <h3 class="card-title">Home Comforts Ⅲ</h3>
+              <p class="card-meta">2021 / 640×360mm</p>
+              <p class="card-desc">ジェッソ、墨、透明水彩、膠、繊維用染料、綿布、木製パネル</p>
+            </div>
+          </article>
+
+          <!-- 8 -->
+          <article class="card">
+            <a class="card-media work-link"
+               href="assets/work-08.jpg"
+               data-title="こばやしけむし Ⅰ"
+               data-meta="2021 / 360×203mm"
+               data-desc="アクリルガッシュ、三角チャコ、クレヨン、透明水彩、膠、繊維用染料、綿布、木製パネル">
+              <img src="assets/work-08.jpg" alt="こばやしけむし Ⅰ 2021" />
+            </a>
+            <div class="card-body">
+              <h3 class="card-title">こばやしけむし Ⅰ</h3>
+              <p class="card-meta">2021 / 360×203mm</p>
+              <p class="card-desc">アクリルガッシュ、三角チャコ、クレヨン、透明水彩、膠、繊維用染料、綿布、木製パネル</p>
+            </div>
+          </article>
+
+          <!-- 9 -->
+          <article class="card">
+            <a class="card-media work-link"
+               href="assets/work-09.jpg"
+               data-title="こばやしけむし Ⅱ"
+               data-meta="2021 / 360×203mm"
+               data-desc="アクリルガッシュ、透明水彩、三角チャコ、膠、繊維用染料、綿布、木製パネル">
+              <img src="assets/work-09.jpg" alt="こばやしけむし Ⅱ 2021" />
+            </a>
+            <div class="card-body">
+              <h3 class="card-title">こばやしけむし Ⅱ</h3>
+              <p class="card-meta">2021 / 360×203mm</p>
+              <p class="card-desc">アクリルガッシュ、透明水彩、三角チャコ、膠、繊維用染料、綿布、木製パネル</p>
+            </div>
+          </article>
+
+          <!-- 10 -->
+          <article class="card">
+            <a class="card-media work-link"
+               href="assets/work-10.jpg"
+               data-title="ボードヴィル・ファンタジー"
+               data-meta="2022 / S100号 1620×1620mm"
+               data-desc="油彩、繊維用染料、キャンバス">
+              <img src="assets/work-10.jpg" alt="ボードヴィル・ファンタジー 2022" />
+            </a>
+            <div class="card-body">
+              <h3 class="card-title">ボードヴィル・ファンタジー</h3>
+              <p class="card-meta">2022 / S100号 1620×1620mm</p>
+              <p class="card-desc">油彩、繊維用染料、キャンバス</p>
+            </div>
+          </article>
+
+          <!-- 11 -->
+          <article class="card">
+            <a class="card-media work-link"
+               href="assets/work-11.jpg"
+               data-title="フェイスパックをつけた女性"
+               data-meta="2023–2025 / 640×360mm"
+               data-desc="墨、パステル、ジェッソ、マーカー、透明水彩、クレヨン、膠、繊維用染料、綿布、木製パネル">
+              <img src="assets/work-11.jpg" alt="フェイスパックをつけた女性 2023-2025" />
+            </a>
+            <div class="card-body">
+              <h3 class="card-title">フェイスパックをつけた女性</h3>
+              <p class="card-meta">2023–2025 / 640×360mm</p>
+              <p class="card-desc">墨、パステル、ジェッソ、マーカー、透明水彩、クレヨン、膠、繊維用染料、綿布、木製パネル</p>
+            </div>
+          </article>
+
+          <!-- 12 -->
+          <article class="card">
+            <a class="card-media work-link"
+               href="assets/work-12.jpg"
+               data-title="夢で見た景色 Ⅱ"
+               data-meta="2025 / F25号 803×652mm"
+               data-desc="油彩、キャンバス">
+              <img src="assets/work-12.jpg" alt="夢で見た景色 Ⅱ 2025" />
+            </a>
+            <div class="card-body">
+              <h3 class="card-title">夢で見た景色 Ⅱ</h3>
+              <p class="card-meta">2025 / F25号 803×652mm</p>
+              <p class="card-desc">油彩、キャンバス</p>
+            </div>
+          </article>
+
+        </div>
+
+        <p class="note">
+          作品情報（サイズ・素材・年）はポートフォリオ記載に基づきます。  [oai_citation:1‡ポートフォリオ2026_縮小_21th_January_2026.pdf](sediment://file_00000000fde87208ab363f26caad994e)
         </p>
       </div>
     </section>
 
-    <section class="section" id="contact">
-      <h2>Contact</h2>
-      <p>
-        お問い合わせ：<a href="mailto:yourname@example.com">yourname@example.com</a><br />
-        Instagram：<a href="#" rel="noopener">(@yourhandle)</a>
-      </p>
+    <!-- CV -->
+    <section id="cv" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>CV</h2>
+          <p class="section-sub">Education / Awards / Exhibitions</p>
+        </div>
+
+        <div class="cv">
+          <div class="cv-block">
+            <h3>Education & Award</h3>
+            <ul>
+              <li>1995 Born in Kanagawa, Japan</li>
+              <li>2018 BFA, Musashino Art University (Oil Painting)</li>
+              <li>2020 Finalist, 22nd Graphic “1_WALL”</li>
+              <li>2023 Diagnosed with schizophrenia</li>
+            </ul>
+          </div>
+
+          <div class="cv-block">
+            <h3>Solo Exhibitions</h3>
+            <ul>
+              <li>2021 「こばやしけむし」 SHINBI GALLERY</li>
+              <li>2022 「Beautiful Gamers」 galleryスペースくらげ</li>
+            </ul>
+          </div>
+
+          <div class="cv-block">
+            <h3>Group Exhibitions</h3>
+            <ul>
+              <li>2020 「第22回 グラフィック『1_WALL』展」ガーディアン・ガーデン</li>
+              <li>2020 「Creation Project 2020『益々繁盛』」ガーディアン・ガーデン</li>
+              <li>2022 「Creation Project 2022『Lucky Cat』」ガーディアン・ガーデン</li>
+              <li>2023 「ゾンビがいる絵展 2」galleryスペースくらげ</li>
+              <li>2024 「ゾンビがいる絵展 3」galleryスペースくらげ</li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="note">
+          CVは修正版ポートフォリオの記載に合わせています。  [oai_citation:2‡ポートフォリオ2026_縮小_21th_January_2026.pdf](sediment://file_00000000fde87208ab363f26caad994e)
+        </p>
+      </div>
     </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section section--alt">
+      <div class="container">
+        <div class="section-head">
+          <h2>Contact</h2>
+          <p class="section-sub">Links / Email</p>
+        </div>
+
+        <div class="contact">
+          <div class="contact-card">
+            <h3>Links</h3>
+            <ul class="link-list">
+              <li><a href="#" target="_blank" rel="noopener">ArtSticker（リンクを入れる）</a></li>
+              <li><a href="#" target="_blank" rel="noopener">Instagram（リンクを入れる）</a></li>
+              <li><a href="#" target="_blank" rel="noopener">X（リンクを入れる）</a></li>
+            </ul>
+          </div>
+
+          <div class="contact-card">
+            <h3>Email</h3>
+            <p class="small">
+              公開したくない場合は、このブロックごと削除してOKです。<br />
+              例：<a href="mailto:hello@example.com">hello@example.com</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p class="small">© <span id="year">2026</span> Kiichiro Kobayashi</p>
+        <p class="small">Built with HTML / CSS / JavaScript</p>
+      </div>
+    </footer>
   </main>
 
-  <footer class="site-footer">
-    <p>© <span id="y"></span> Kiichiro Kobayashi</p>
-  </footer>
+  <!-- Modal（作品を大きく見る） -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal__overlay" data-close="true"></div>
 
-  <script>
-    // 年だけ入れる（最小のJS）
-    document.getElementById("y").textContent = new Date().getFullYear();
-  </script>
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-label="Artwork viewer">
+      <button class="modal__close" type="button" data-close="true" aria-label="Close">×</button>
+
+      <img class="modal__img" id="modalImg" alt="" />
+
+      <div class="modal__info">
+        <h3 class="modal__title" id="modalTitle"></h3>
+        <p class="modal__meta" id="modalMeta"></p>
+        <p class="modal__desc" id="modalDesc"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
