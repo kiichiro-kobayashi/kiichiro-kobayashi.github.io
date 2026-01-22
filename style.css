@@ -287,6 +287,10 @@ img{ max-width: 100%; height: auto; display:block; }
   border-radius: var(--radius);
   border: 1px solid var(--line);
   background: rgba(20,24,38,.96);
+  overflow: visible;
+}
+.modal__body{
+  border-radius: var(--radius);
   overflow: hidden;
 }
 .modal__close{
@@ -307,7 +311,6 @@ img{ max-width: 100%; height: auto; display:block; }
   max-height: 70vh;
   object-fit: contain;
   background: rgba(0,0,0,.25);
-  border-radius: 0;
 }
 .modal__info{ padding: 14px; }
 .modal__title{ margin: 0 0 4px; font-size: 16px; }
