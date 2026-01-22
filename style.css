@@ -287,10 +287,6 @@ img{ max-width: 100%; height: auto; display:block; }
   border-radius: var(--radius);
   border: 1px solid var(--line);
   background: rgba(20,24,38,.96);
-  overflow: visible;
-}
-.modal__body{
-  border-radius: var(--radius);
   overflow: hidden;
 }
 .modal__close{
