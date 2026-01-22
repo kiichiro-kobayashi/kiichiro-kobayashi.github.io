@@ -167,7 +167,6 @@ img{ max-width: 100%; height: auto; display:block; }
 /* Sections */
 .section{ 
   padding: 48px 0; 
-  scroll-margin-top: 90px;
 }
 .section--alt{
   background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0));
