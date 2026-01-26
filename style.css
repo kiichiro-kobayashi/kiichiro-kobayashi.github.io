@@ -323,3 +323,27 @@ img{ max-width: 100%; height: auto; display:block; }
   .grid{ grid-template-columns: 1fr; }
   .nav a{ font-size: 13px; padding: 6px 8px; }
 }
+/* coded drawing (footer) */
+.coded-drawing{
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  opacity: 0.7;
+}
+
+.coded-drawing svg rect:first-child{
+  fill: #b9ff5a; /* 黄緑 */
+}
+
+.coded-drawing svg rect:last-child{
+  fill: #8b6cff; /* 紫 */
+}
+
+.coded-caption{
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  text-transform: lowercase;
+}
