@@ -334,11 +334,12 @@ img{ max-width: 100%; height: auto; display:block; }
 }
 
 .coded-drawing svg rect:first-child{
-  fill: #b9ff5a; /* 黄緑 */
+  fill: #8b6cff; /* 紫 */
+
 }
 
 .coded-drawing svg rect:last-child{
-  fill: #8b6cff; /* 紫 */
+  fill: #b9ff5a; /* 黄緑 */
 }
 
 .coded-caption{
