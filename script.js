@@ -1,205 +1,237 @@
-/* script.js (ES5) */
+/* script.js (ES5-compatible) */
 
-/* =========================
-   1) Footer year
-========================= */
 (function () {
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 })();
 
-/* =========================
-   2) Nav active (Scroll Spy)
-   - IntersectionObserverは使わない（端末差でズレるため）
-   - スクロール位置で確実に判定する
-========================= */
+/* Language switch */
+(function () {
+  var button = document.getElementById("languageToggle");
+  var jpElements = document.querySelectorAll(".lang-ja");
+  var enElements = document.querySelectorAll(".lang-en");
+  var currentLabel = button ? button.querySelector(".language-toggle__current") : null;
+  var otherLabel = button ? button.querySelector(".language-toggle__other") : null;
+  var language = "ja";
+
+  function applyLanguage(nextLanguage) {
+    var i;
+    language = nextLanguage === "en" ? "en" : "ja";
+    document.documentElement.lang = language;
+    document.body.setAttribute("data-language", language);
+
+    for (i = 0; i < jpElements.length; i++) {
+      jpElements[i].hidden = language !== "ja";
+    }
+    for (i = 0; i < enElements.length; i++) {
+      enElements[i].hidden = language !== "en";
+    }
+
+    if (button) {
+      button.setAttribute("aria-pressed", language === "en" ? "true" : "false");
+      button.setAttribute("aria-label", language === "ja" ? "Switch to English" : "日本語に切り替える");
+    }
+    if (currentLabel) currentLabel.textContent = language === "ja" ? "JP" : "EN";
+    if (otherLabel) otherLabel.textContent = language === "ja" ? "EN" : "JP";
+
+    try {
+      window.localStorage.setItem("portfolioLanguage", language);
+    } catch (error) {
+      /* Local storage may be unavailable; the site still works. */
+    }
+  }
+
+  function getInitialLanguage() {
+    var saved = "";
+    try {
+      saved = window.localStorage.getItem("portfolioLanguage") || "";
+    } catch (error) {
+      saved = "";
+    }
+    if (saved === "ja" || saved === "en") return saved;
+    return "ja";
+  }
+
+  if (button) {
+    button.addEventListener("click", function () {
+      applyLanguage(language === "ja" ? "en" : "ja");
+    });
+  }
+
+  window.portfolioLanguage = function () {
+    return language;
+  };
+
+  applyLanguage(getInitialLanguage());
+})();
+
+/* Navigation highlight */
 (function () {
   var navLinks = document.querySelectorAll(".nav-link");
   var ids = ["about", "works", "cv", "contact"];
   var sections = [];
+  var ticking = false;
   var i;
 
   for (i = 0; i < ids.length; i++) {
-    var sec = document.getElementById(ids[i]);
-    if (sec) sections.push(sec);
+    var section = document.getElementById(ids[i]);
+    if (section) sections.push(section);
   }
 
   function setActive(id) {
-    for (var j = 0; j < navLinks.length; j++) {
-      var a = navLinks[j];
-      var href = a.getAttribute("href");
-      a.classList.toggle("is-active", href === ("#" + id));
+    var j;
+    for (j = 0; j < navLinks.length; j++) {
+      var link = navLinks[j];
+      link.classList.toggle("is-active", link.getAttribute("href") === "#" + id);
     }
   }
 
-  function getHeaderH() {
-    var headerEl = document.querySelector(".site-header");
-    return headerEl ? headerEl.offsetHeight : 0;
+  function getHeaderHeight() {
+    var header = document.querySelector(".site-header");
+    return header ? header.offsetHeight : 0;
   }
 
-  function updateActiveFromScroll() {
-    var headerH = getHeaderH();
-    var line = headerH + 32; // ヘッダー直下の判定ライン（微調整しやすい値）
-    var activeId = "about";
+  function updateActive() {
+    var line = getHeaderHeight() + 36;
+    var activeId = "";
+    var j;
 
-    for (var k = 0; k < sections.length; k++) {
-      var top = sections[k].getBoundingClientRect().top;
-      if (top <= line) activeId = sections[k].id;
+    for (j = 0; j < sections.length; j++) {
+      if (sections[j].getBoundingClientRect().top <= line) {
+        activeId = sections[j].id;
+      }
     }
-
     setActive(activeId);
   }
 
-  var ticking = false;
   function requestUpdate() {
     if (ticking) return;
     ticking = true;
     window.requestAnimationFrame(function () {
-      updateActiveFromScroll();
+      updateActive();
       ticking = false;
     });
   }
 
-  // 初回
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", updateActiveFromScroll);
-  } else {
-    updateActiveFromScroll();
-  }
-
-  // スクロール/リサイズ/向き変更で更新
   window.addEventListener("scroll", requestUpdate, { passive: true });
   window.addEventListener("resize", requestUpdate);
   window.addEventListener("orientationchange", requestUpdate);
+  window.addEventListener("load", updateActive);
 
-  // クリック直後にも反映（体感のズレ防止）
   for (i = 0; i < navLinks.length; i++) {
     navLinks[i].addEventListener("click", function () {
       var href = this.getAttribute("href") || "";
       if (href.charAt(0) === "#") setActive(href.slice(1));
     });
   }
+
+  updateActive();
 })();
 
-/* =========================
-   3) Works modal
-   - Androidでスクロールしようとしても開かないようにする
-   - 「タップ（指の移動が小さい）」ときだけ開く
-========================= */
+/* Works modal: open only after a deliberate tap/click */
 (function () {
   var modal = document.getElementById("modal");
   var modalImg = document.getElementById("modalImg");
   var modalTitle = document.getElementById("modalTitle");
   var modalMeta = document.getElementById("modalMeta");
   var modalDesc = document.getElementById("modalDesc");
+  var workLinks = document.querySelectorAll(".work-link");
+  var lastFocused = null;
+  var startX = 0;
+  var startY = 0;
+  var moved = false;
+  var moveLimit = 10;
+  var i;
 
-  function openModal(data) {
+  function currentLanguage() {
+    if (typeof window.portfolioLanguage === "function") return window.portfolioLanguage();
+    return document.documentElement.lang === "en" ? "en" : "ja";
+  }
+
+  function openModal(link) {
+    var isEnglish = currentLanguage() === "en";
     if (!modal || !modalImg) return;
 
-    modalImg.src = data.src || "";
-    modalImg.alt = data.title || "Artwork";
-    if (modalTitle) modalTitle.textContent = data.title || "";
-    if (modalMeta) modalMeta.textContent = data.meta || "";
-    if (modalDesc) modalDesc.textContent = data.desc || "";
+    lastFocused = link;
+    modalImg.src = link.getAttribute("href") || "";
+    modalImg.alt = isEnglish
+      ? (link.getAttribute("data-title-en") || link.getAttribute("data-title") || "Artwork")
+      : (link.getAttribute("data-title") || "作品");
+    modalTitle.textContent = isEnglish
+      ? (link.getAttribute("data-title-en") || link.getAttribute("data-title") || "")
+      : (link.getAttribute("data-title") || "");
+    modalMeta.textContent = link.getAttribute("data-meta") || "";
+    modalDesc.textContent = isEnglish
+      ? (link.getAttribute("data-desc-en") || link.getAttribute("data-desc") || "")
+      : (link.getAttribute("data-desc") || "");
 
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden";
+    document.body.classList.add("modal-open");
+    var closeButton = modal.querySelector(".modal__close");
+    if (closeButton) closeButton.focus();
   }
 
   function closeModal() {
     if (!modal) return;
-
     modal.classList.remove("is-open");
     modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("modal-open");
     if (modalImg) modalImg.src = "";
-    document.body.style.overflow = "";
+    if (lastFocused && typeof lastFocused.focus === "function") lastFocused.focus();
   }
 
-  // ---- タップ判定（これがAndroidの誤爆を止める）
-  var TAP_MOVE_PX = 10; // 10px以上動いたら「スクロール」とみなす
-  var startX = 0;
-  var startY = 0;
-  var moved = false;
-
-  function getPoint(e) {
-    if (e.touches && e.touches.length) return e.touches[0];
-    if (e.changedTouches && e.changedTouches.length) return e.changedTouches[0];
-    return e;
+  function pointFromEvent(event) {
+    if (event.touches && event.touches.length) return event.touches[0];
+    if (event.changedTouches && event.changedTouches.length) return event.changedTouches[0];
+    return event;
   }
 
-  function onDown(e) {
-    var p = getPoint(e);
-    startX = p.clientX;
-    startY = p.clientY;
+  function onDown(event) {
+    var point = pointFromEvent(event);
+    startX = point.clientX;
+    startY = point.clientY;
     moved = false;
   }
 
-  function onMove(e) {
-    var p = getPoint(e);
-    if (Math.abs(p.clientX - startX) > TAP_MOVE_PX || Math.abs(p.clientY - startY) > TAP_MOVE_PX) {
+  function onMove(event) {
+    var point = pointFromEvent(event);
+    if (Math.abs(point.clientX - startX) > moveLimit || Math.abs(point.clientY - startY) > moveLimit) {
       moved = true;
     }
   }
 
-  function openFromLink(e, a) {
-    // スクロールしていたら開かない
-    if (moved) return;
+  function bindLink(link) {
+    if (window.PointerEvent) {
+      link.addEventListener("pointerdown", onDown, { passive: true });
+      link.addEventListener("pointermove", onMove, { passive: true });
+      link.addEventListener("pointercancel", function () { moved = true; }, { passive: true });
+    } else {
+      link.addEventListener("touchstart", onDown, { passive: true });
+      link.addEventListener("touchmove", onMove, { passive: true });
+      link.addEventListener("touchcancel", function () { moved = true; }, { passive: true });
+    }
 
-    if (e && e.preventDefault) e.preventDefault();
-
-    openModal({
-      src: a.getAttribute("href") || "",
-      title: a.getAttribute("data-title") || "",
-      meta: a.getAttribute("data-meta") || "",
-      desc: a.getAttribute("data-desc") || ""
+    link.addEventListener("click", function (event) {
+      event.preventDefault();
+      if (moved) {
+        moved = false;
+        return;
+      }
+      openModal(link);
     });
   }
 
-  // work-link に付与
-  var workLinks = document.querySelectorAll(".work-link");
-  for (var i = 0; i < workLinks.length; i++) {
-    (function (a) {
-      // Pointer Eventsが使える端末はそれを優先（Androidに強い）
-      if (window.PointerEvent) {
-        a.addEventListener("pointerdown", onDown, { passive: true });
-        a.addEventListener("pointermove", onMove, { passive: true });
-        a.addEventListener("pointerup", function (e) { openFromLink(e, a); }, { passive: false });
-        a.addEventListener("pointercancel", function () { moved = true; }, { passive: true });
-      } else {
-        // フォールバック
-        a.addEventListener("touchstart", onDown, { passive: true });
-        a.addEventListener("touchmove", onMove, { passive: true });
-        a.addEventListener("touchend", function (e) { openFromLink(e, a); }, { passive: false });
-        a.addEventListener("click", function (e) {
-          // clickは保険。touch環境では二重発火しやすいので、touchで開いた後はprevent
-          e.preventDefault();
-        }, false);
-      }
+  for (i = 0; i < workLinks.length; i++) bindLink(workLinks[i]);
 
-      // PC等：クリックで開く
-      a.addEventListener("click", function (e) {
-        // pointer/touchで既に開く端末でも「クリックだけ」発火する場合があるため、
-        // movedがtrueの時（＝スクロール）には開かない
-        if (moved) return;
-        if (e && e.preventDefault) e.preventDefault();
-        openFromLink(e, a);
-      });
-    })(workLinks[i]);
-  }
-
-  // 背景 or × を押したら閉じる（data-close="true"）
   if (modal) {
-    modal.addEventListener("click", function (e) {
-      var t = e.target;
-      if (t && t.getAttribute && t.getAttribute("data-close") === "true") {
-        closeModal();
-      }
+    modal.addEventListener("click", function (event) {
+      var target = event.target;
+      if (target && target.getAttribute && target.getAttribute("data-close") === "true") closeModal();
     });
   }
 
-  // ESCで閉じる
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") closeModal();
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && modal && modal.classList.contains("is-open")) closeModal();
   });
 })();
