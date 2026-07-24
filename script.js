@@ -92,17 +92,33 @@
   }
 
   function updateActive() {
-    var line = getHeaderHeight() + 36;
-    var activeId = "";
-    var j;
+  var line = getHeaderHeight() + 36;
+  var activeId = "";
+  var j;
 
-    for (j = 0; j < sections.length; j++) {
-      if (sections[j].getBoundingClientRect().top <= line) {
-        activeId = sections[j].id;
-      }
-    }
-    setActive(activeId);
+  /* ページ最下部では Contact を必ず現在地にする */
+  var scrollBottom =
+    window.pageYOffset + window.innerHeight;
+
+  var documentHeight =
+    Math.max(
+      document.body.scrollHeight,
+      document.documentElement.scrollHeight
+    );
+
+  if (scrollBottom >= documentHeight - 8) {
+    setActive("contact");
+    return;
   }
+
+  for (j = 0; j < sections.length; j++) {
+    if (sections[j].getBoundingClientRect().top <= line) {
+      activeId = sections[j].id;
+    }
+  }
+
+  setActive(activeId);
+}
 
   function requestUpdate() {
     if (ticking) return;
