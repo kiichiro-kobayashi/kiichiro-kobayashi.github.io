@@ -160,6 +160,20 @@ cite{ font-style:italic; }
 .card{ display:flex; flex-direction:column; overflow:hidden; border:1px solid var(--line); border-radius:var(--radius); background:rgba(255,255,255,.04); }
 .card-media{ display:block; overflow:hidden; background:rgba(255,255,255,.03); touch-action:pan-y; }
 .card-media img{ width:100%; aspect-ratio:4/3; object-fit:cover; transition:transform .28s ease,opacity .28s ease; }
+.card-media--contain{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    /* カードと同じ背景色 */
+    background:var(--panel);
+}
+
+.card-media--contain img{
+    width:100%;
+    aspect-ratio:4/3;
+    object-fit:contain;
+}
 @media (hover:hover){ .card-media:hover img{ transform:scale(1.015); opacity:.94; } }
 .card-body{ padding:13px 13px 16px; }
 .card-title{ margin:0 0 5px; font-size:16px; letter-spacing:.01em; line-height:1.5; }
