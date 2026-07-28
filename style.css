@@ -226,7 +226,7 @@ cite{ font-style:italic; }
 }
 
 @media (max-width:620px){
-  :root{ --header-offset:166px; }
+  :root{ --header-offset:138px; }
   .container{ width:min(var(--max),calc(100% - 28px)); }
   .site-header{ position:sticky; }
   .header-inner{ min-height:0; flex-direction:column; align-items:stretch; gap:9px; }
