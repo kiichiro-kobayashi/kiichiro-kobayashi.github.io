@@ -92,7 +92,9 @@
   }
 
   function updateActive() {
-  var line = getHeaderHeight() + 36;
+  var rootStyles = window.getComputedStyle(document.documentElement);
+  var cssOffset = parseFloat(rootStyles.getPropertyValue("--header-offset"));
+  var line = isNaN(cssOffset) ? getHeaderHeight() + 36 : cssOffset + 1;
   var activeId = "";
   var j;
 
