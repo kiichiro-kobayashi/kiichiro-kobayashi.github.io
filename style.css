@@ -144,6 +144,35 @@ cite{ font-style:italic; }
 .prose p{ margin:0 0 17px; color:rgba(232,232,234,.92); }
 .prose p:last-child{ margin-bottom:0; }
 
+.about-brand{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  margin:0 0 24px;
+}
+.about-brand__mark{
+  width:58px;
+  height:58px;
+  flex:0 0 auto;
+  object-fit:contain;
+  opacity:.96;
+}
+.about-brand__name p{ margin:0; }
+.about-brand__jp{
+  color:var(--text);
+  font-size:18px;
+  font-weight:700;
+  letter-spacing:.035em;
+  line-height:1.4;
+}
+.about-brand__en{
+  margin-top:2px !important;
+  color:var(--muted);
+  font-size:13px;
+  letter-spacing:.035em;
+  line-height:1.4;
+}
+
 .exhibition-inner{ display:grid; grid-template-columns:.8fr 1.2fr; gap:40px; align-items:start; }
 .exhibition-head{ margin:0; }
 .exhibition-title-en{ margin:8px 0 0; color:var(--muted); font-size:14px; font-style:italic; }
@@ -199,7 +228,15 @@ cite{ font-style:italic; }
 .coded-drawing svg rect:last-child{ fill:#b9ff5a; }
 .coded-caption{ margin:0; color:var(--muted); font-size:10px; letter-spacing:.15em; text-transform:lowercase; }
 .coded-left{ transform:translateY(-6px) rotate(-2deg); transform-box:fill-box; transform-origin:center; }
-.footer-inner{ display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-top:22px; padding-top:17px; border-top:1px solid var(--line); }
+.footer-inner{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-top:22px; padding-top:17px; border-top:1px solid var(--line); }
+.footer-brand{ display:flex; align-items:center; gap:10px; }
+.footer-brand__mark{
+  width:30px;
+  height:30px;
+  flex:0 0 auto;
+  object-fit:contain;
+  opacity:.72;
+}
 
 .modal{ position:fixed; inset:0; z-index:50; display:none; overflow:auto; padding:18px 0; }
 .modal.is-open{ display:block; }
@@ -238,6 +275,9 @@ cite{ font-style:italic; }
   .language-toggle{ margin-left:auto; }
   .hero{ padding-top:42px; }
   .section{ padding:46px 0; }
+  .about-brand{ gap:13px; margin-bottom:21px; }
+  .about-brand__mark{ width:50px; height:50px; }
+  .about-brand__jp{ font-size:17px; }
   .section-head--row{ align-items:flex-start; }
   .work-count{ display:none; }
   .grid{ grid-template-columns:1fr; }
